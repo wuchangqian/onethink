@@ -1,0 +1,77 @@
+<extend name="Base/common" />
+<block name='body'>
+
+
+<form action="{:U('Baoming/save')}" method="POST" >
+    <input type='hidden' id='step' value="1" />
+  <fieldset id='fs1'  class="fs">
+    <legend>第一步</legend>
+    <label>公司/项目名称</label>
+    <input type="text" name='name' placeholder="请输入公司名称或者项目名称…">
+    <!--<span class="help-block"> </span>
+     <label class="checkbox">
+      <input type="checkbox" name='s'> Check me out
+    </label> -->
+  </fieldset>
+  <fieldset id='fs2' style="display:none;" class="fs">
+    <legend>第二步</legend>
+    <label>详细信息</label>
+    <dl>
+        <dt>姓名</dt>
+        <dd><input type="text" name="mname" style="width:300px;"></dd>
+        <div class="h10"></div>
+        <dt>单位名称</dt>
+        <dd><input type="text" name="mcompany" style="width:300px;"></dd>
+        <div class="h10"></div>
+        <dt>职务</dt>
+        <dd>
+            <label for="position1">运营: </label><input id="position1" type="radio" name="position" value="运营">&nbsp;&nbsp;
+            <label for="position2">推广: </label><input id="position2" type="radio" name="position" value="推广">&nbsp;&nbsp;
+            <label for="position3">美工: </label><input id="position3" type="radio" name="position" value="美工">&nbsp;&nbsp;
+            <label for="position4">客服: </label><input id="position4" type="radio" name="position" value="客服">&nbsp;&nbsp;
+            <label for="position5">仓储物流: </label><input id="position5" type="radio" name="position" value="仓储物流">&nbsp;&nbsp;
+            <label for="position6">其他: </label><input id="position6" type="radio" name="position" value="其他">
+        </dd>
+        <div class="h10"></div>
+        <dt>联系电话</dt>
+        <dd><input type="text" name="tel" style="width:300px;"></dd>
+        <div class="h10"></div>
+        <dt>QQ号码</dt>
+        <dd><input type="text" name="qq" style="width:300px;"></dd>
+        <div class="h10"></div>
+        <dt>验证码</dt>
+        <dd>
+            <input type="text" name="checkcode" style="width:100px;">
+            <img src="/train/authimg.php" style="padding-left:10px;">
+        </dd>
+    </dl>
+
+  </fieldset>
+
+  <fieldset id='fs3' style="display:none;" class="fs">
+    <legend>第三步</legend>
+
+  </fieldset>
+    <button type='button' id='next' >下一步</button>
+    <button type="submit" id='smt' class="btn" style="display:none;">提交</button>
+</form>
+
+
+<script type="text/javascript">
+
+
+    $(function(){
+
+        $('#next').click(function(){
+            var next = parseInt($('#step').val())+1;
+            $('#step').val(next);
+            $('.fs').hide();
+            $('#fs'+next).show();
+            if(next == 2){
+                $('#next').hide();
+                $('#smt').show();
+            }
+        });
+    });
+</script>
+</block>

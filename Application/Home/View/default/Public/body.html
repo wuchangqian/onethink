@@ -1,0 +1,90 @@
+<block name="header"></block>
+<style>
+    .bs-docs-sidebar h3{
+        text-indent: 20px;
+        font-size: 16px;
+        letter-spacing: 2px;
+        font-weight: 900;
+        background-color: #F1F8FF;
+    }
+    #myside{
+        overflow: hidden;;
+        float:right;
+    }
+    .combox{
+        border: 1px solid #ddd;
+    }
+    .combox h2,.combox h3,.combox h4,.combox h5,.combox h6{
+        margin-top:0px;
+    }
+    .combox .cbox5{
+        padding:10px;
+    }
+</style>
+<div id="main-container" class="container" style="border:0px solid red;">
+
+    <div class="row ">
+        <div class="span9">
+            <block name="body"></block>
+        </div>
+        <div class="span3">
+            <block name="side">
+            <!-- 左侧 nav
+            ================================================== -->
+                <div class="span3 bs-docs-sidebar" id='myside'>
+
+                    <ul class="nav nav-list bs-docs-sidenav2">
+                        <li>
+                            <block name="t1">
+                                <div class="combox ">
+                                    <h3 class="title_color title_bg_color border_color">会议信息</h3>
+                                    <div class="cbox5">
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </block>
+                        </li>
+                        <li>
+                            <block name="t3">
+                                <div class="combox ">
+                                    <h3 class="cb-h3">会议信息</h3>
+                                    <div class="cbox5">
+                                        <p><span class="title_color">会议日期：</span><br>时间：2016年5月31日（星期二）<br>下午14：00-17:00（13:00开始签到）</p>
+                                        <p><span class="title_color">会议地点：</span><br>地点：深圳市福田区金田路4028号经贸中心大厦6楼会议室</p>
+                                        <p><span class="title_color">联系电话：</span><br>联系人：朱琳、曾浩文<br>电话：88916850、88916891<br>传真：0755-83786186-8888</p>
+                                    </div>
+                                </div>
+                            </block>
+                        </li>
+                        <li>
+                            <block name='t2'>
+                                <h3 class="btn-info">培训地址ssdfa</h3>
+                                <div class="span3 container">
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    wcqqq<br/>
+                                    wcqqq<br/>
+                                    wcqqq<br/>
+                                    <br/>
+                                </div>
+                            </block>
+                        </li>
+                    </ul>
+
+                    <block name="publish"></block>
+                    {:W('Category/lists', array($category['id'], ACTION_NAME == 'index'))}
+
+                </div>
+            </block>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        $(window).resize(function(){
+            $("#main-container").css("min-height", $(window).height() - 343);
+        }).resize();
+    })
+</script>

@@ -1,0 +1,22 @@
+<div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="{:U('Index/index?category='.$cate['name'])}">首页</a>
+    <ul class="nav">
+      <volist name="category" id="cate">
+		<eq name="current" value="$cate['id']">
+			<li class="active">
+				<a href="{:U('Article/lists?category='.$cate['name'])}">
+					{$cate.title}
+				</a>
+			</li>
+		<else/>
+			<li class="">
+				<a href="{:U('Article/lists?category='.$cate['name'])}">
+					{$cate.title}
+				</a>
+			</li>
+		</eq>
+	</volist>
+    </ul>
+  </div>
+</div>
