@@ -15,11 +15,11 @@ class Verify {
     protected $config =	array(
         'seKey'     => 'ThinkPHP.CN',   //验证码加密密钥
         'expire'    => 1800,            // 验证码过期时间（s）
-        'useZh'     => false,           // 使用中文验证码 
-        'useImgBg'  => false,           // 使用背景图片 
+        'useZh'     => false,           // 使用中文验证码
+        'useImgBg'  => false,           // 使用背景图片
         'fontSize'  => 25,              // 验证码字体大小(px)
-        'useCurve'  => true,            // 是否画混淆曲线
-        'useNoise'  => true,            // 是否添加杂点	
+        'useCurve'  => false,            // 是否画混淆曲线
+        'useNoise'  => false,            // 是否添加杂点
         'imageH'    => 0,               // 验证码图片高度
         'imageW'    => 0,               // 验证码图片宽度
         'length'    => 5,               // 验证码位数
@@ -96,13 +96,13 @@ class Verify {
      */
     public function entry($id = '') {
         // 图片宽(px)
-        $this->imageW || $this->imageW = $this->length*$this->fontSize*1.5 + $this->length*$this->fontSize/2; 
+        $this->imageW || $this->imageW = $this->length*$this->fontSize*1.5 + $this->length*$this->fontSize/2;
         // 图片高(px)
         $this->imageH || $this->imageH = $this->fontSize * 2.5;
         // 建立一幅 $this->imageW x $this->imageH 的图像
-        $this->_image = imagecreate($this->imageW, $this->imageH); 
-        // 设置背景      
-        imagecolorallocate($this->_image, $this->bg[0], $this->bg[1], $this->bg[2]); 
+        $this->_image = imagecreate($this->imageW, $this->imageH);
+        // 设置背景
+        imagecolorallocate($this->_image, $this->bg[0], $this->bg[1], $this->bg[2]);
 
         // 验证码字体随机颜色
         $this->_color = imagecolorallocate($this->_image, mt_rand(1,150), mt_rand(1,150), mt_rand(1,150));
@@ -111,7 +111,7 @@ class Verify {
 
         if(empty($this->fontttf)){
             $dir = dir($ttfPath);
-            $ttfs = array();		
+            $ttfs = array();
             while (false !== ($file = $dir->read())) {
                 if($file[0] != '.' && substr($file, -4) == '.ttf') {
                     $ttfs[] = $file;
@@ -119,22 +119,22 @@ class Verify {
             }
             $dir->close();
             $this->fontttf = $ttfs[array_rand($ttfs)];
-        } 
+        }
         $this->fontttf = $ttfPath . $this->fontttf;
-        
+
         if($this->useImgBg) {
             $this->_background();
         }
-        
+
         if ($this->useNoise) {
             // 绘杂点
             $this->_writeNoise();
-        } 
+        }
         if ($this->useCurve) {
             // 绘干扰线
             $this->_writeCurve();
         }
-        
+
         // 绘验证码
         $code = array(); // 验证码
         $codeNX = 0; // 验证码第N个字符的左边距
@@ -148,9 +148,9 @@ class Verify {
                 $this->useZh || imagettftext($this->_image, $this->fontSize, mt_rand(-40, 40), $codeNX, $this->fontSize*1.6, $this->_color, $this->fontttf, $code[$i]);
             }
         }
-        
+
         $this->useZh && imagettftext($this->_image, $this->fontSize, 0, ($this->imageW - $this->fontSize*$this->length*1.2)/3, $this->fontSize * 1.5, $this->_color, $this->fontttf, iconv("GB2312","UTF-8", join('', $code)));
-        
+
         // 保存验证码
         $key = $this->authcode($this->seKey);
         $code = $this->authcode(strtoupper(implode('', $code)));
@@ -164,9 +164,9 @@ class Verify {
         }
         session($key, $session);
 
-                
+
         header('Cache-Control: private, max-age=0, no-store, no-cache, must-revalidate');
-        header('Cache-Control: post-check=0, pre-check=0', false);		
+        header('Cache-Control: post-check=0, pre-check=0', false);
         header('Pragma: no-cache');
         header("content-type: image/png");
 
@@ -175,9 +175,9 @@ class Verify {
         imagedestroy($this->_image);
     }
 
-    /** 
-     * 画一条由两条连在一起构成的随机正弦函数曲线作干扰线(你可以改成更帅的曲线函数) 
-     *      
+    /**
+     * 画一条由两条连在一起构成的随机正弦函数曲线作干扰线(你可以改成更帅的曲线函数)
+     *
      *      高中的数学公式咋都忘了涅，写出来
      *		正弦型函数解析式：y=Asin(ωx+φ)+b
      *      各常数值对函数图像的影响：
@@ -189,14 +189,14 @@ class Verify {
      */
     private function _writeCurve() {
         $px = $py = 0;
-        
+
         // 曲线前部分
         $A = mt_rand(1, $this->imageH/2);                  // 振幅
         $b = mt_rand(-$this->imageH/4, $this->imageH/4);   // Y轴方向偏移量
         $f = mt_rand(-$this->imageH/4, $this->imageH/4);   // X轴方向偏移量
         $T = mt_rand($this->imageH, $this->imageW*2);  // 周期
         $w = (2* M_PI)/$T;
-                        
+
         $px1 = 0;  // 曲线横坐标起始位置
         $px2 = mt_rand($this->imageW/2, $this->imageW * 0.8);  // 曲线横坐标结束位置
 
@@ -204,18 +204,18 @@ class Verify {
             if ($w!=0) {
                 $py = $A * sin($w*$px + $f)+ $b + $this->imageH/2;  // y = Asin(ωx+φ) + b
                 $i = (int) ($this->fontSize/5);
-                while ($i > 0) {	
-                    imagesetpixel($this->_image, $px + $i , $py + $i, $this->_color);  // 这里(while)循环画像素点比imagettftext和imagestring用字体大小一次画出（不用这while循环）性能要好很多				
+                while ($i > 0) {
+                    imagesetpixel($this->_image, $px + $i , $py + $i, $this->_color);  // 这里(while)循环画像素点比imagettftext和imagestring用字体大小一次画出（不用这while循环）性能要好很多
                     $i--;
                 }
             }
         }
-        
+
         // 曲线后部分
-        $A = mt_rand(1, $this->imageH/2);                  // 振幅		
+        $A = mt_rand(1, $this->imageH/2);                  // 振幅
         $f = mt_rand(-$this->imageH/4, $this->imageH/4);   // X轴方向偏移量
         $T = mt_rand($this->imageH, $this->imageW*2);  // 周期
-        $w = (2* M_PI)/$T;		
+        $w = (2* M_PI)/$T;
         $b = $py - $A * sin($w*$px + $f) - $this->imageH/2;
         $px1 = $px2;
         $px2 = $this->imageW;
@@ -224,8 +224,8 @@ class Verify {
             if ($w!=0) {
                 $py = $A * sin($w*$px + $f)+ $b + $this->imageH/2;  // y = Asin(ωx+φ) + b
                 $i = (int) ($this->fontSize/5);
-                while ($i > 0) {			
-                    imagesetpixel($this->_image, $px + $i, $py + $i, $this->_color);	
+                while ($i > 0) {
+                    imagesetpixel($this->_image, $px + $i, $py + $i, $this->_color);
                     $i--;
                 }
             }
@@ -255,7 +255,7 @@ class Verify {
         $path = dirname(__FILE__).'/Verify/bgs/';
         $dir = dir($path);
 
-        $bgs = array();		
+        $bgs = array();
         while (false !== ($file = $dir->read())) {
             if($file[0] != '.' && substr($file, -4) == '.jpg') {
                 $bgs[] = $path . $file;

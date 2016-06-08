@@ -35,6 +35,7 @@ class Article extends TagLib{
 
 		$parse  = '<?php ';
 		$parse .= '$category=D(\'Category\')->getChildrenId('.$cate.');';
+		// $parse .= "echo D('Category')->_sql();";
 		$parse .= '$__LIST__ = D(\'Document\')->page(!empty($_GET["p"])?$_GET["p"]:1,'.$row.')->lists(';
 		$parse .= '$category, \'`level` DESC,`id` DESC\', 1,';
 		$parse .= $field . ');';

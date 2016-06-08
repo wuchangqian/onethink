@@ -16,6 +16,8 @@ use Think\Controller;
  */
 class HomeController extends Controller {
 
+    protected $zhuangti = array();
+
 	/* 空操作，用于输出404页面 */
 	public function _empty(){
 		$this->redirect('Index/index');
@@ -29,6 +31,25 @@ class HomeController extends Controller {
 
         if(!C('WEB_SITE_CLOSE')){
             $this->error('站点已经关闭，请稍后访问~');
+        }
+        $rootcatid = session('rootcatid');
+        if($o = M('Zhuangti')->where(array('rootcatid='.$rootcatid))->find()){
+            $this->zhuangti = $o;
+            $this->assign('t1h3' , $this->zhuangti['t1h3']);
+            $this->assign('t2h3' , $this->zhuangti['t2h3']);
+            $this->assign('t3h3' , $this->zhuangti['t3h3']);
+            $this->assign('t4h3' , $this->zhuangti['t4h3']);
+            $this->assign('t5h3' , $this->zhuangti['t5h3']);
+            $this->assign('t6h3' , $this->zhuangti['t6h3']);
+            $this->assign('m1content' , $this->zhuangti['m1content']);
+            $this->assign('m2content' , $this->zhuangti['m2content']);
+            $this->assign('t1content' , $this->zhuangti['t1content']);
+            $this->assign('t2content' , $this->zhuangti['t2content']);
+            $this->assign('t3content' , $this->zhuangti['t3content']);
+            $this->assign('t4content' , $this->zhuangti['t4content']);
+            $this->assign('t5content' , $this->zhuangti['t5content']);
+            $this->assign('t6content' , $this->zhuangti['t6content']);
+            $this->assign('footer' , $this->zhuangti['footer']);
         }
     }
 

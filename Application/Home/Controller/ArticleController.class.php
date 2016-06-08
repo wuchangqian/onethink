@@ -40,11 +40,16 @@ class ArticleController extends HomeController {
 			$this->error('获取列表数据失败！');
 		}
 
-		/* 模板赋值并渲染模板 */
-		$this->assign('category', $category);
-		$this->assign('list', $list);
-		// dump($category);die();
-		$this->display($category['template_lists']);
+		if(count($list) === 1){ ## 如果这个分类下只有一篇文章 ， 就跳转到详情页。
+			$this->redirect('Article/detail' , array('id' => $list[0]['id']) );
+		}else{
+
+			/* 模板赋值并渲染模板 */
+			$this->assign('category', $category);
+			$this->assign('list', $list);
+			// dump($category);die();
+			$this->display($category['template_lists']);
+		}
 	}
 
 	/* 文档模型详情页 */

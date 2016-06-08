@@ -3,48 +3,67 @@
 
 
 <form action="{:U('Baoming/save')}" method="POST" >
-    <input type='hidden' id='step' value="1" />
+    <input type='hidden' id='id' name='id' value="" />
   <fieldset id='fs1'  class="fs">
-    <legend>第一步</legend>
-    <label>公司/项目名称</label>
-    <input type="text" name='name' placeholder="请输入公司名称或者项目名称…">
+    <!-- <legend> </legend> -->
+    <!-- <label>公司/项目名称</label> -->
+    <!-- <input type="text" name='name' placeholder="请输入公司名称或者项目名称…"> -->
     <!--<span class="help-block"> </span>
      <label class="checkbox">
       <input type="checkbox" name='s'> Check me out
     </label> -->
+    <dl>
+        <dt>姓名</dt>
+        <dd><input type="text" name="name" style="width:300px;"></dd>
+        <div class="h10"></div>
+        <dt>单位名称</dt>
+        <dd><input type="text" name="company" style="width:300px;"></dd>
+        <div class="h10"></div>
+        <dt>职务</dt>
+        <dd>
+            <label style="display:inline;" for="position1">运营: </label><input id="position1" type="radio" name="jobs" value="运营">&nbsp;&nbsp;
+            <label style="display:inline;" for="position2">推广: </label><input id="position2" type="radio" name="jobs" value="推广">&nbsp;&nbsp;
+            <label style="display:inline;" for="position3">美工: </label><input id="position3" type="radio" name="jobs" value="美工">&nbsp;&nbsp;
+            <label style="display:inline;" for="position4">客服: </label><input id="position4" type="radio" name="jobs" value="客服">&nbsp;&nbsp;
+            <label style="display:inline;" for="position5">仓储物流: </label><input id="position5" type="radio" name="jobs" value="仓储物流">&nbsp;&nbsp;
+            <label style="display:inline;" for="position6">其他: </label><input id="position6" type="radio" name="jobs" value="其他">
+        </dd>
+        <div class="h10"></div>
+        <dt>QQ号码</dt>
+        <dd><input type="text" name="qq" style="width:300px;" /></dd>
+        <div class="h10"></div>
+        <dt>Email</dt>
+        <dd><input type="text" name="email" style="width:300px;" /></dd>
+        <div class="h10"></div>
+        <dt>联系电话</dt>
+        <dd><input type="text" name="telephone" style="width:300px;" /></dd>
+        <div class="h10"></div>
+        <dt>验证码</dt>
+        <div class="item verifycode">
+            <i class="icon-login-verifycode"></i>
+            <input type="text" name="verify" placeholder="请填写验证码" autocomplete="off">
+            <a class="reloadverify" title="换一张" href="javascript:void(0)">换一张？</a>
+        </div>
+        <span class="placeholder_copy placeholder_check">请填写验证码</span>
+        <div>
+            <img class="verifyimg reloadverify" alt="点击切换" src="{:U('Baoming/verify')}">
+            <script type="text/javascript">
+                var verifyimg = $(".verifyimg").attr("src");
+                $(".reloadverify").click(function(){
+                    if( verifyimg.indexOf('?')>0){
+                        $(".verifyimg").attr("src", verifyimg+'&random='+Math.random());
+                    }else{
+                        $(".verifyimg").attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
+                    }
+                });
+
+            </script>
+        </div>
+    </dl>
   </fieldset>
   <fieldset id='fs2' style="display:none;" class="fs">
     <legend>第二步</legend>
     <label>详细信息</label>
-    <dl>
-        <dt>姓名</dt>
-        <dd><input type="text" name="mname" style="width:300px;"></dd>
-        <div class="h10"></div>
-        <dt>单位名称</dt>
-        <dd><input type="text" name="mcompany" style="width:300px;"></dd>
-        <div class="h10"></div>
-        <dt>职务</dt>
-        <dd>
-            <label for="position1">运营: </label><input id="position1" type="radio" name="position" value="运营">&nbsp;&nbsp;
-            <label for="position2">推广: </label><input id="position2" type="radio" name="position" value="推广">&nbsp;&nbsp;
-            <label for="position3">美工: </label><input id="position3" type="radio" name="position" value="美工">&nbsp;&nbsp;
-            <label for="position4">客服: </label><input id="position4" type="radio" name="position" value="客服">&nbsp;&nbsp;
-            <label for="position5">仓储物流: </label><input id="position5" type="radio" name="position" value="仓储物流">&nbsp;&nbsp;
-            <label for="position6">其他: </label><input id="position6" type="radio" name="position" value="其他">
-        </dd>
-        <div class="h10"></div>
-        <dt>联系电话</dt>
-        <dd><input type="text" name="tel" style="width:300px;"></dd>
-        <div class="h10"></div>
-        <dt>QQ号码</dt>
-        <dd><input type="text" name="qq" style="width:300px;"></dd>
-        <div class="h10"></div>
-        <dt>验证码</dt>
-        <dd>
-            <input type="text" name="checkcode" style="width:100px;">
-            <img src="/train/authimg.php" style="padding-left:10px;">
-        </dd>
-    </dl>
 
   </fieldset>
 
@@ -52,8 +71,9 @@
     <legend>第三步</legend>
 
   </fieldset>
-    <button type='button' id='next' >下一步</button>
-    <button type="submit" id='smt' class="btn" style="display:none;">提交</button>
+    <!-- <button type='button' id='next' >下一步</button> -->
+    <button type="submit" id='smt' class="btn" >提 交</button>
+    <button type="reset" id='rst' class="btn" >重 置</button>
 </form>
 
 
@@ -61,7 +81,7 @@
 
 
     $(function(){
-
+        return;
         $('#next').click(function(){
             var next = parseInt($('#step').val())+1;
             $('#step').val(next);

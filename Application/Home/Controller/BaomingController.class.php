@@ -25,11 +25,25 @@ class BaomingController extends HomeController {
 	}
 
     public function save(){
+        // $verify = new \Think\Verify();
+        // if(!$verify->check(I('verify'), 1)){
+        //     $this->error('验证码输入错误！');
+        //     return;
+        // }
+         $Baoming = D('Baoming');
+        if(IS_POST){ //提交表单
+            $obj = $Baoming->create();
+            if($Baoming->add($obj)){
+                $this->success('编辑成功！', U('index'));
+            } else {
+                $error = $Baoming->getError();
+                // echo $error;
+                // die();
+                $this->error(empty($error) ? '未知错误！' : $error , U('Baoming/index'));
+            }
+        }else{
 
-        if(IS_POST){
-            var_dump($_POST);
-            die();
-            echo 32323;
+            $this->error('输入错误！');
         }
 
     }

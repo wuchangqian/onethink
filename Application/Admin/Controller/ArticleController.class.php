@@ -430,6 +430,7 @@ class ArticleController extends AdminController {
 
         //获取表单字段排序
         $fields = get_model_attribute($model['id']);
+        // dump($fields);die();
         $this->assign('fields',     $fields);
 
 

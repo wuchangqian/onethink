@@ -1,5 +1,4 @@
 <extend name="Base/common"/>
-
 <block name="header">
     <header class="jumbotron subhead" id="overview">
         <div class="container">
@@ -8,23 +7,77 @@
         </div>
     </header>
 </block>
-<!-- <block name="side">
-    <div class="span3 bs-docs-sidebar">
-    </div>
-</block> -->
-<block name='t1'>
-    <div class="combox ">
-        <h3 class="cb-h3">{$article.uid|get_username}</h3>
-        <div class="cbox5">
-            <p>{$article.category_id|get_category_title}</p>
-        </div>
-    </div>
-</block>
 
 <block name="body">
+<style>
+.carousel-indicators li {
+    display: block;
+    float: left;
+    width: 10px;
+    height: 10px;
+    margin-left: 5px;
+    text-indent: -999px;
+    background-color: #ccc;
+    background-color: #0088cc;
+    border-radius: 5px;
+}
+.carousel-indicators .active {
+    background-color: #0C0C0C;
+}
+.carousel-indicators {
+    position: absolute;
+    top: 155px;
+    z-index: 5;
+    margin: 0;
+    list-style: none;
+    left:10px ;
+}
+</style>
     <div class="span8">
         <!-- Contents
         ================================================== -->
+
+        <div class="row">
+            <div class="combox span3">
+                <div class="cbox5">
+                    <div id="myCarousel" class="carousel slide">
+                      <!-- Carousel items -->
+                      <div class="carousel-inner">
+                        <volist name="pics" id="vo">
+                            <div class="item"><img src="{$vo.path}" alt=""></div>
+                        </volist>
+                        <div class="active item"><img src="/Uploads/Picture/2.png" alt=""></div>
+                      </div>
+
+                      <!-- Carousel nav -->
+                      <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                      <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+                      <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                        <li data-target="#myCarousel" data-slide-to="3"></li>
+                      </ol>
+                    </div>
+
+                </div>
+            </div>
+            <div class="combox span5" style="margin:0 0 0 20px;">
+                <h3 class="title_color title_bg_color border_color">{$m1h3}</h3>
+                <div class="cbox5">
+                    <p>{$m1content}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="combox span8">
+                <h3 class="title_color title_bg_color border_color">{$m2h3}</h3>
+                <div class="cbox5">
+                    <p>{$m2content}</p>
+                </div>
+            </div>
+        </div>
+        {/*
         <section id="contents">
             <article:list name="article" category="1" child="true">
                 <div class="">
@@ -43,8 +96,8 @@
                 </div>
                 <hr/>
             </article:list>
-
         </section>
+        */}
     </div>
         <!--</div>-->
 </block>

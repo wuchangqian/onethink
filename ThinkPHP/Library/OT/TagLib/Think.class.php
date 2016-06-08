@@ -196,7 +196,7 @@ class Think extends TagLib{
             return $this->_data(array('name'=>"Document", 'where'=>'status=1 AND __DOCUMENT.id='.$tag['id'], 'field'=>$field,'result'=>$result,'order'=>$order,'join'=>$join),$content);
         }else{ // 获取数据集
             $where = 'status=1 ';
-            
+
             if(!empty($tag['model'])) {
                 $where .= ' AND model_id='.$tag['model'];
             }
