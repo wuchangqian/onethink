@@ -1,0 +1,70 @@
+<div class="form-item cf">
+    <label class="item-label">第一个区块标题<span class="check-tips">（请输入标题）</span></label>
+    <div class="controls">
+        <input type="text" class="text input-large" name="m1h3" value="{$info.m1h3}">
+    </div>
+     <label class="textarea">
+    <textarea name="m1content">{$info['m1content']}</textarea>
+    </label>
+    <label class="item-label">第二个区块标题<span class="check-tips">（请输入标题）</span></label>
+    <div class="controls">
+        <input type="text" class="text input-large" name="m2h3" value="{$info.m2h3}">
+    </div>
+     <label class="textarea">
+    <textarea name="m2content">{$info['m2content']}</textarea>
+    <script type="text/javascript">
+        var editor31;
+        KindEditor.ready(function(K) {
+            editor31 = K.create('textarea[name="m1content"]', {
+                allowFileManager : false,
+                themesPath: K.basePath,
+                width: '100%',
+                height: '200',
+                resizeType: 1,
+                pasteType : 2,
+                urlType : 'absolute',
+                fileManagerJson : '{:U('fileManagerJson')}',
+                //uploadJson : '{:U('uploadJson')}' }
+                uploadJson : '{:addons_url("EditorForAdmin://Upload/ke_upimg")}'
+            });
+        });
+
+        $(function(){
+            //传统表单提交同步
+            $('textarea[name="m1content"]').closest('form').submit(function(){
+                editor31.sync();
+            });
+            //ajax提交之前同步
+            $('button[type="submit"],#submit,.ajax-post').click(function(){
+                editor31.sync();
+            });
+        });
+        var editor32;
+        KindEditor.ready(function(K) {
+            editor32 = K.create('textarea[name="m2content"]', {
+                allowFileManager : false,
+                themesPath: K.basePath,
+                width: '100%',
+                height: '200',
+                resizeType: 1,
+                pasteType : 2,
+                urlType : 'absolute',
+                fileManagerJson : '{:U('fileManagerJson')}',
+                //uploadJson : '{:U('uploadJson')}' }
+                uploadJson : '{:addons_url("EditorForAdmin://Upload/ke_upimg")}'
+            });
+        });
+
+        $(function(){
+            //传统表单提交同步
+            $('textarea[name="m2content"]').closest('form').submit(function(){
+                editor32.sync();
+            });
+            //ajax提交之前同步
+            $('button[type="submit"],#submit,.ajax-post').click(function(){
+                editor32.sync();
+            });
+        })
+    </script>
+    </label>
+</div>

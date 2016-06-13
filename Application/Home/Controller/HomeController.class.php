@@ -32,7 +32,12 @@ class HomeController extends Controller {
         if(!C('WEB_SITE_CLOSE')){
             $this->error('站点已经关闭，请稍后访问~');
         }
-        $rootcatid = session('rootcatid');
+        if($rootcatid = I('get.rootid')){
+            ;;;;;
+        }else{
+            $rootcatid = session('rootcatid');
+        }
+
         if($o = M('Zhuangti')->where(array('rootcatid='.$rootcatid))->find()){
             $this->zhuangti = $o;
             $this->assign('t1h3' , $this->zhuangti['t1h3']);

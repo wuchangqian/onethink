@@ -53,6 +53,7 @@ class CategoryWidget extends Action{
 		} else {
 			$category = D('Category')->getSameLevel($cate, $field);
 		}
+
 		$this->assign('category', $category);
 		$this->assign('current', $cate);
 		$this->assign('c', $cate);
@@ -77,6 +78,7 @@ class CategoryWidget extends Action{
 			$root = $this->getCurrentCatTreeNodeId($cate);
 			session('rootcatid' ,$root);
 		}
+			// session('rootcatid' ,1);
 		// echo $root;
 
 		$dt = M('Zhuangti')->where(array('rootcatid' => $root))->find();

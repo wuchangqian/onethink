@@ -14,6 +14,8 @@ if(version_compare(PHP_VERSION,'5.3.0','<'))  die('require PHP > 5.3.0 !');
  * 项目正式部署后请设置为false
  */
 define ( 'APP_DEBUG', true );
+// define ( 'APP_ENV', 'prod');  #### dev | prod
+define ( 'APP_ENV', 'dev');  #### dev | prod
 
 /**
  * 应用目录设置

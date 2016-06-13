@@ -18,16 +18,18 @@ class IndexController extends HomeController {
 
 	//系统首页
     public function index(){
-         $rootid = I('get.rootid');
-        // echo 3232;die();
+        $rootid = I('get.rootid');
+        if(!$rootid){
+            $this->redirect('index/lists');
+            return;
+        }else{
+            session('rootcatid' ,$rootid);
+        }
 
         $category = D('Category')->getTree();
 
-        // $lists    = D('Document')->lists(null);
-        // $pics = ;
-        $pics = 1;
-        // session('rootcatid' , 1);
         $Zhuangti = M("Zhuangti")->where('rootcatid='.$rootid)->find();
+
         $map['id']  = array('in',implode(',' , array($Zhuangti['lunbo1'] , $Zhuangti['lunbo2'] , $Zhuangti['lunbo3'] , $Zhuangti['lunbo4'])));
         $pics = M('Picture')->where($map)->select();
         $this->assign('pics',$pics);//栏目
@@ -39,4 +41,10 @@ class IndexController extends HomeController {
         $this->display();
     }
 
+    public function lists(){
+        // session('rootcatid' , null);
+         $Zhuangti = M("Zhuangti")->where(array('status'=>'1'))->select();
+         $this->assign('zt' , $Zhuangti);
+         $this->display();
+    }
 }

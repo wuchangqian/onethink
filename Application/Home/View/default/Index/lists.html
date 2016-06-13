@@ -1,0 +1,53 @@
+<extend name="Base/common"/>
+<block name="header">
+    <header class="jumbotron subhead" id="overview">
+        <div class="container">
+            <h2> </h2>
+            <p class="lead"></p>
+        </div>
+    </header>
+</block>
+<block name='tops'>
+
+</block>
+<block name="body">
+<style>
+.carousel-indicators li {
+    display: block;
+    float: left;
+    width: 10px;
+    height: 10px;
+    margin-left: 5px;
+    text-indent: -999px;
+    background-color: #ccc;
+    background-color: #0088cc;
+    border-radius: 5px;
+}
+.carousel-indicators .active {
+    background-color: #0C0C0C;
+}
+.carousel-indicators {
+    position: absolute;
+    top: 155px;
+    z-index: 5;
+    margin: 0;
+    list-style: none;
+    left:10px ;
+}
+</style>
+    <div class="span11">
+        <ul  class="nav nav-tabs nav-stacked">
+        <volist name="zt" id="vo" >
+            <li><a href="{:U('index/index' , array('rootid'=>$vo[rootcatid]))}">{$vo.name}</a></li>
+        </volist>
+        </ul>
+   </div>
+</block>
+<block name='side'>
+
+</block>
+
+<block name='mainbanner'>
+</block>
+<block name='footer'>
+</block>

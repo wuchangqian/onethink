@@ -21,6 +21,7 @@ class BaomingController extends HomeController {
         $this->assign('index' , $reg);
         $this->assign('course' , 13);
         $this->assign('main' , 13);
+        $this->assign('rootid' , I('get.rootid'));
 		$this->display();
 	}
 

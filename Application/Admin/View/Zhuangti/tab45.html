@@ -1,0 +1,37 @@
+<div class="form-item cf">
+    <label class="item-label">右边第5块标题<span class="check-tips">（请输入标题）</span></label>
+    <div class="controls">
+        <input type="text" class="text input-large" name="t5h3" value="{$info.t5h3}">
+    </div>
+     <label class="textarea">
+    <textarea name="t5content">{$info['t5content']}</textarea>
+    <script type="text/javascript">
+        var editor45;
+        KindEditor.ready(function(K) {
+            editor45 = K.create('textarea[name="t5content"]', {
+                allowFileManager : false,
+                themesPath: K.basePath,
+                width: '100%',
+                height: '200',
+                resizeType: 1,
+                pasteType : 2,
+                urlType : 'absolute',
+                fileManagerJson : '{:U('fileManagerJson')}',
+                //uploadJson : '{:U('uploadJson')}' }
+                uploadJson : '{:addons_url("EditorForAdmin://Upload/ke_upimg")}'
+            });
+        });
+
+        $(function(){
+            //传统表单提交同步
+            $('textarea[name="t5content"]').closest('form').submit(function(){
+                editor45.sync();
+            });
+            //ajax提交之前同步
+            $('button[type="submit"],#submit,.ajax-post').click(function(){
+                editor45.sync();
+            });
+        })
+    </script>
+    </label>
+</div>

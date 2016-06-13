@@ -1,4 +1,5 @@
 /Runtime/*
+/.phpintel
 /.htaccess
 /www.onethink-local.com.sql
 /账号信息.txt
@@ -6,3 +7,4 @@
 /Runtime/Logs
 /Runtime/Temp
 /Runtime/Cache
+/.idea/

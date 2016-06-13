@@ -1,0 +1,39 @@
+<div class="form-item cf">
+    <!--  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+    <label class="item-label">右边第2块标题<span class="check-tips">（请输入标题）</span></label>
+    <div class="controls">
+        <input type="text" class="text input-large" name="t2h3" value="{$info.t2h3}">
+    </div>
+     <label class="textarea">
+    <textarea name="t2content">{$info['t2content']}</textarea>
+    <script type="text/javascript">
+        var editor42;
+        KindEditor.ready(function(K) {
+            editor42 = K.create('textarea[name="t2content"]', {
+                allowFileManager : false,
+                themesPath: K.basePath,
+                width: '100%',
+                height: '200',
+                resizeType: 1,
+                pasteType : 2,
+                urlType : 'absolute',
+                fileManagerJson : '{:U('fileManagerJson')}',
+                //uploadJson : '{:U('uploadJson')}' }
+                uploadJson : '{:addons_url("EditorForAdmin://Upload/ke_upimg")}'
+            });
+        });
+
+        $(function(){
+            //传统表单提交同步
+            $('textarea[name="t2content"]').closest('form').submit(function(){
+                editor42.sync();
+            });
+            //ajax提交之前同步
+            $('button[type="submit"],#submit,.ajax-post').click(function(){
+                editor42.sync();
+            });
+        })
+    </script>
+    </label>
+
+</div>
